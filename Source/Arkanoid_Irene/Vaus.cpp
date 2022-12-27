@@ -5,16 +5,13 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 
+
+
 // Sets default values
 AVaus::AVaus()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	// Set this pawn to be controlled by the lowest-numbered player|||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
-
-
 
 
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PawnMesh"));
@@ -22,13 +19,15 @@ AVaus::AVaus()
 	RootComponent = PawnMesh;
 
 	//Set gravity to false and fix it to the XY axis
-	PawnMesh->SetConstraintMode(EDOFMode::XYPlane);
+	PawnMesh->SetConstraintMode(EDOFMode::XZPlane);
 	PawnMesh->SetEnableGravity(false);
 
 	PawnMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PawnMesh->SetCollisionProfileName(TEXT("PhysicsActor"));//||||||||||||||||||||||||||||||||||||
 	
+	FloatPMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Pawn Movement"));
 
+	
 
 }
 
@@ -41,7 +40,7 @@ void AVaus::BeginPlay()
 
 void AVaus::MoveRight(float Val)
 {
-	AddMovementInput(FVector(0.f, -1.f, 0.f), Val, false);
+	AddMovementInput(FVector(1.f, 0.f, 0.f), Val , false);
 }
 
 // Called every frame

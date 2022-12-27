@@ -25,12 +25,12 @@ protected:
 
 
 
-	void MoveRight(float Val);
+	
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Propeties)
-		UFloatingPawnMovement* Movement;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UFloatingPawnMovement* FloatPMovement;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Propeties)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* PawnMesh;
 
 
@@ -43,7 +43,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-	/*UPROPERTY(EditAnywhere)
-	USceneComponent* OurVisibleComponent;*/
+	void MoveRight(float Val);
 
 };
