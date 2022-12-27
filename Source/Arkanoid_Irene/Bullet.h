@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Bullet.generated.h"
+//#include "GameFramework/PlayerController.h"
 
-
+class AVaus;
 class UProjectileMovementComponent;
 
 UCLASS()
@@ -19,7 +20,7 @@ public:
 	ABullet();
 
 	virtual void Shoot();
-	void Respawn(float x, float y, float z);
+
 
 	bool is_Shot;
 
@@ -33,13 +34,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UProjectileMovementComponent* ProjectileMovement;
 
+	
+		AVaus* SceneVaus;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION()
 		UStaticMeshComponent* GetBullet();
 
-
+		void SetPawn(AVaus& _Vaus);
 
 	
 		

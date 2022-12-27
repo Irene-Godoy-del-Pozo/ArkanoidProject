@@ -4,7 +4,9 @@
 #include "Bullet.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Engine/EngineTypes.h"
+#include "Vaus.h"
+
+#include "GameFramework/Controller.h"
 
 // Sets default values
 ABullet::ABullet()
@@ -39,9 +41,9 @@ ABullet::ABullet()
 
 	//Movement settings
 	ProjectileMovement->Friction = 0.0f;
-	ProjectileMovement->Velocity.X = 0.0f;
+	//ProjectileMovement->Velocity.X = 0.0f;
 
-	/*Respawn(0, 0, 0);*/
+	
 }
 
 // Called when the game starts or when spawned
@@ -56,11 +58,32 @@ void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (is_Shot == false && SceneVaus)
+	{
+		//auto auxPawn =Cast<AVaus>( GetPawn());
+
+
+		
+		this->SetActorLocation(SceneVaus->GetActorLocation() + FVector(0.f, 0.f, 10.f));
+
+		//BulletMesh (BulletObj,
+		//	MyBullet->GetActorLocation() + FVector(0.f, 0.f, 1.f),
+		//	MyBullet->GetActorRotation() + FRotator(0.f, 0.f, 1.f),
+		//	SpawnInfo);
+
+
+	}
+
 }
 
 UStaticMeshComponent* ABullet::GetBullet()
 {
 	return BulletMesh;
+}
+
+void ABullet::SetPawn(AVaus& _Vaus)
+{
+	SceneVaus = &_Vaus;
 }
 
 void ABullet::Shoot()
@@ -75,9 +98,5 @@ void ABullet::Shoot()
 
 }
 
-void ABullet::Respawn(float x, float y, float z)
-{
-	SetActorLocation(FVector(x, y, z));
-	
-}
+
 

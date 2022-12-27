@@ -43,6 +43,11 @@ void AVaus::MoveRight(float Val)
 	AddMovementInput(FVector(1.f, 0.f, 0.f), Val , false);
 }
 
+UStaticMeshComponent* AVaus::GetMesh()
+{
+	return PawnMesh;
+}
+
 // Called every frame
 void AVaus::Tick(float DeltaTime)
 {

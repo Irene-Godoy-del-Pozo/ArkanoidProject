@@ -22,6 +22,8 @@ void AVaus_Controller::SetupInputComponent()
 	InputComponent->BindAction("Shoot", IE_Pressed, this, &AVaus_Controller::ShootBullet);
 }
 
+
+
 void AVaus_Controller::BeginPlay()
 {
 	//Get ALL Camera actors of the scene. In this case it will be only one 
@@ -32,15 +34,17 @@ void AVaus_Controller::BeginPlay()
 	FViewTargetTransitionParams Params;
 	SetViewTarget(CameraActors[0], Params);
 
+	MyVaus = Cast<AVaus>( GetPawn());
+
 	SpawnNewBullet();
 }
 
 void AVaus_Controller::MoveRight(float Val)
 {
-	auto auxPawn = Cast<AVaus>(GetPawn());
+	
 
-	if (auxPawn)
-		auxPawn->MoveRight(Val);
+	if (MyVaus)
+		MyVaus->MoveRight(Val);
 
 
 }
@@ -52,6 +56,7 @@ void AVaus_Controller::SpawnNewBullet()
 	if (BulletObj)
 		MyBullet = GetWorld()->SpawnActor<ABullet>(BulletObj, SpawnLocation, SpawnRotation, SpawnInfo);
 
+	MyBullet->SetPawn(*MyVaus);
 }
 
 

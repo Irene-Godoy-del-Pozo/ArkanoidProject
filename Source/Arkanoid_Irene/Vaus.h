@@ -45,4 +45,7 @@ public:
 
 	void MoveRight(float Val);
 
+	UFUNCTION()
+	UStaticMeshComponent* GetMesh();
+
 };

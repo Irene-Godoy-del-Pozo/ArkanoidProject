@@ -8,6 +8,7 @@
 
 
 class ABullet;
+class AVaus;
 
 UCLASS()
 class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
@@ -22,11 +23,17 @@ private:
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
 
+	
+
+
 protected:
 
 	virtual void BeginPlay() override;
 
 	void MoveRight(float Val);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		AVaus* MyVaus;
 
 	void ShootBullet();
 
