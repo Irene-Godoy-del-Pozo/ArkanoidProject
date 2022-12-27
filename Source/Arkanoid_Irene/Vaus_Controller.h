@@ -14,8 +14,10 @@ class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
 {
 	GENERATED_BODY()
 
+public :
 		AVaus_Controller() {};
 
+private:
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
 
