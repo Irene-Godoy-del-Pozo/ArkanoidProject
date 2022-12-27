@@ -6,9 +6,9 @@
 #include "GameFramework/PlayerController.h"
 #include "Vaus_Controller.generated.h"
 
-/**
- * 
- */
+
+class ABullet;
+
 UCLASS()
 class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
 {
@@ -17,6 +17,7 @@ class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
 public :
 		AVaus_Controller() {};
 
+		void SpawnNewBullet();
 private:
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
@@ -26,4 +27,16 @@ protected:
 	virtual void BeginPlay() override;
 
 	void MoveRight(float Val);
+
+	void ShootBullet();
+
+	//References the bluprint of bullet. TSubclassof references the TYPE of data. It permit to Create new objects of the class
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABullet> BulletObj;
+
+	ABullet* MyBullet;
+
+	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
+	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
+	FActorSpawnParameters SpawnInfo;
 };

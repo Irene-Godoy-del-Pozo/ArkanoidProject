@@ -7,6 +7,9 @@
 #include "Camera/CameraActor.h"
 
 #include "Vaus.h"
+#include "Bullet.h"
+
+
 
 void AVaus_Controller::SetupInputComponent()
 {
@@ -16,6 +19,7 @@ void AVaus_Controller::SetupInputComponent()
 
 	//Bind the Axis on the input window to the method to Move
 	InputComponent->BindAxis("MoveRight", this, &AVaus_Controller::MoveRight);
+	InputComponent->BindAction("Shoot", IE_Pressed, this, &AVaus_Controller::ShootBullet);
 }
 
 void AVaus_Controller::BeginPlay()
@@ -28,6 +32,7 @@ void AVaus_Controller::BeginPlay()
 	FViewTargetTransitionParams Params;
 	SetViewTarget(CameraActors[0], Params);
 
+	SpawnNewBullet();
 }
 
 void AVaus_Controller::MoveRight(float Val)
@@ -38,4 +43,19 @@ void AVaus_Controller::MoveRight(float Val)
 		auxPawn->MoveRight(Val);
 
 
+}
+void AVaus_Controller::SpawnNewBullet()
+{
+	if (!MyBullet)
+		MyBullet = nullptr;
+
+	if (BulletObj)
+		MyBullet = GetWorld()->SpawnActor<ABullet>(BulletObj, SpawnLocation, SpawnRotation, SpawnInfo);
+
+}
+
+
+void AVaus_Controller::ShootBullet()
+{
+	MyBullet->Shoot();
 }

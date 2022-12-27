@@ -39,7 +39,7 @@ ABullet::ABullet()
 
 	//Movement settings
 	ProjectileMovement->Friction = 0.0f;
-	ProjectileMovement->Velocity.Y = 0.0f;
+	ProjectileMovement->Velocity.X = 0.0f;
 
 	/*Respawn(0, 0, 0);*/
 }
