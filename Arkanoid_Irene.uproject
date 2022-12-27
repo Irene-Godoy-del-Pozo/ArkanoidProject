@@ -7,7 +7,10 @@
 		{
 			"Name": "Arkanoid_Irene",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	]
 }
