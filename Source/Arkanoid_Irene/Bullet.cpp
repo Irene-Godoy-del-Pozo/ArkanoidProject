@@ -7,6 +7,7 @@
 #include "Vaus.h"
 
 #include "GameFramework/Controller.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ABullet::ABullet()
@@ -58,18 +59,38 @@ void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//If its not shot , it follows thw Vaus
 	if (is_Shot == false && SceneVaus)
 	{
-		//auto auxPawn =Cast<AVaus>( GetPawn());
+		SetActorLocation(SceneVaus->GetActorLocation() + FVector(0.f, 0.f, 10.f));
+
+	}
+	//If is shot throw a raycast to detect the Vause
+	else
+	{
+		FHitResult OutHit;
+
+		//Set The start and end vectors
+		FVector Start = GetActorLocation() -FVector(0.f, 0.f, 4.f);
+		FVector DownVector = -GetActorUpVector();
+		FVector End = ((DownVector * 7.f) + Start);
+
+		DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 0.5f, 0, 3);
+
+		FCollisionQueryParams CollisionParams;
+		CollisionParams.AddIgnoredActor(this);
+
+		FCollisionObjectQueryParams ObjParams;
+		ObjParams.AddObjectTypesToQuery(ECollisionChannel::ECC_PhysicsBody);
 
 
-		
-		this->SetActorLocation(SceneVaus->GetActorLocation() + FVector(0.f, 0.f, 10.f));
+		bool is_hit = GetWorld()->LineTraceSingleByObjectType(OutHit, Start, End, ObjParams, CollisionParams);
 
-		//BulletMesh (BulletObj,
-		//	MyBullet->GetActorLocation() + FVector(0.f, 0.f, 1.f),
-		//	MyBullet->GetActorRotation() + FRotator(0.f, 0.f, 1.f),
-		//	SpawnInfo);
+		if (is_hit)//(ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 0.3f, FColor::Red, FString::Printf(TEXT("Dio")));
+			GEngine->AddOnScreenDebugMessage(-1, 0.3f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
+		}
 
 
 	}
