@@ -10,6 +10,7 @@
 class AVaus;
 class UProjectileMovementComponent;
 
+
 UCLASS()
 class ARKANOID_IRENE_API ABullet : public AActor
 {
@@ -19,8 +20,9 @@ public:
 	// Sets default values for this actor's properties
 	ABullet();
 
-	virtual void Shoot();
+	void Shoot();
 
+	
 
 	bool is_Shot;
 
@@ -33,6 +35,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UProjectileMovementComponent* ProjectileMovement;
+
+	
 
 	
 		AVaus* SceneVaus;////

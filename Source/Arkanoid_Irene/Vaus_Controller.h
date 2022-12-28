@@ -19,6 +19,10 @@ public :
 		AVaus_Controller() {};
 
 		void SpawnNewBullet();
+
+		UFUNCTION()
+		AVaus* GetMyVaus();
+
 private:
 	UFUNCTION()
 		virtual void SetupInputComponent() override;

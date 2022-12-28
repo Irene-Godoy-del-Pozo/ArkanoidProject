@@ -4,11 +4,12 @@
 #include "Bullet.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Vaus.h"
 #include "DrawDebugHelpers.h"
-
 #include "GameFramework/Controller.h"
 #include "Kismet/KismetMathLibrary.h"
+
+#include "Vaus.h"
+
 
 // Sets default values
 ABullet::ABullet()

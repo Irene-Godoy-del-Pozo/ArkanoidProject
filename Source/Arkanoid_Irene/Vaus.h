@@ -7,6 +7,7 @@
 #include "Vaus.generated.h"
 
 class UFloatingPawnMovement;
+class UHealthComponent;
 
 UCLASS()
 class ARKANOID_IRENE_API AVaus : public APawn
@@ -19,13 +20,23 @@ public:
 	// Sets default values for this pawn's properties
 	AVaus();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void TakeDamage();
+
+	void MoveRight(float Val);
+
+	UFUNCTION()
+		UStaticMeshComponent* GetMesh();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-
-
-	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UFloatingPawnMovement* FloatPMovement;
@@ -33,19 +44,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* PawnMesh;
 
-
-public:	
-
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-
-	void MoveRight(float Val);
-
-	UFUNCTION()
-	UStaticMeshComponent* GetMesh();
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UHealthComponent* healthComponent;
 
 };

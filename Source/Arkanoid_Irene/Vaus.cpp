@@ -5,7 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 
-
+#include "HealthComponent.h"
 
 // Sets default values
 AVaus::AVaus()
@@ -27,7 +27,10 @@ AVaus::AVaus()
 	
 	FloatPMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Pawn Movement"));
 
-	
+	//-------------Health----------
+
+	healthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+
 
 }
 
@@ -63,3 +66,12 @@ void AVaus::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AVaus::TakeDamage()
+{
+	healthComponent->TakeDamage();
+
+	if (healthComponent->GetHealth() <= 0)
+	{
+		//Death
+	}
+}

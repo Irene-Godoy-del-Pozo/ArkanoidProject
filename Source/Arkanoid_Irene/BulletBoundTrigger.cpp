@@ -7,6 +7,7 @@
 #include "DrawDebugHelpers.h"
 
 #include "Vaus_Controller.h"
+#include "Vaus.h"
 
 // Sets default values
 ABulletBoundTrigger::ABulletBoundTrigger()
@@ -18,6 +19,8 @@ ABulletBoundTrigger::ABulletBoundTrigger()
 	RootComponent = Box_Collision;
 
 	Box_Collision->SetBoxExtent(FVector(380.0f, 10.0f, 50.0f));
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -28,6 +31,8 @@ void ABulletBoundTrigger::BeginPlay()
 	Box_Collision->OnComponentBeginOverlap.AddDynamic(this, &ABulletBoundTrigger::OnOverlapBegin);
 
 	_vausController = Cast<AVaus_Controller>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+
+	
 }
 
 void ABulletBoundTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndexType, bool bFromSweep, const FHitResult& SweepResult)
@@ -37,6 +42,10 @@ void ABulletBoundTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AA
 		OtherActor->Destroy();
 
 		_vausController->SpawnNewBullet();
+
+		AVaus* aux = _vausController->GetMyVaus();
+
+		aux->TakeDamage();
 
 	}
 }

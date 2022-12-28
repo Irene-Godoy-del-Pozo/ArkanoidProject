@@ -64,3 +64,8 @@ void AVaus_Controller::ShootBullet()
 {
 	MyBullet->Shoot();
 }
+
+AVaus* AVaus_Controller::GetMyVaus()
+{
+	return MyVaus;
+}

@@ -48,6 +48,7 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		MyBullet->GetBullet()->SetPhysicsLinearVelocity(BulletVelocity, true);
 	
 		
+		
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, 0.05f, false);
 
