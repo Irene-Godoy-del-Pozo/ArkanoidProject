@@ -28,6 +28,9 @@ public:
 
 	void TakeDamage();
 
+	UFUNCTION(BlueprintPure)
+	float GetHealth();
+
 	void MoveRight(float Val);
 
 	UFUNCTION()

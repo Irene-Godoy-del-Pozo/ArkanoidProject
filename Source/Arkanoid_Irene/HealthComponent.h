@@ -16,7 +16,9 @@ public:
 	// Sets default values for this component's properties
 	UHealthComponent();
 
-	float GetHealth();
+	UFUNCTION(BlueprintPure)
+		float GetHealth();
+
 	void TakeDamage();
 
 protected:

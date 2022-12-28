@@ -75,3 +75,8 @@ void AVaus::TakeDamage()
 		//Death
 	}
 }
+
+float AVaus::GetHealth()
+{
+	return healthComponent->GetHealth();
+}
