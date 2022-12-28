@@ -8,6 +8,7 @@
 
 #include "GameFramework/Controller.h"
 #include "DrawDebugHelpers.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 ABullet::ABullet()
@@ -45,6 +46,7 @@ ABullet::ABullet()
 	//ProjectileMovement->Velocity.X = 0.0f;
 
 	
+	
 }
 
 // Called when the game starts or when spawned
@@ -66,30 +68,56 @@ void ABullet::Tick(float DeltaTime)
 
 	}
 	//If is shot throw a raycast to detect the Vause
-	else
+	else if (this->GetActorLocation().Z < 40)
 	{
 		FHitResult OutHit;
 
 		//Set The start and end vectors
-		FVector Start = GetActorLocation() -FVector(0.f, 0.f, 4.f);
+		FVector Start = GetActorLocation() -FVector(0.f, 0.f, 2.f);
 		FVector DownVector = -GetActorUpVector();
-		FVector End = ((DownVector * 7.f) + Start);
+		FVector End = ((DownVector * 1.f) + Start);
 
 		DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 0.5f, 0, 3);
 
+		//Ignore the bullet
 		FCollisionQueryParams CollisionParams;
 		CollisionParams.AddIgnoredActor(this);
 
+		//Necesary to detect the Vaus 
 		FCollisionObjectQueryParams ObjParams;
 		ObjParams.AddObjectTypesToQuery(ECollisionChannel::ECC_PhysicsBody);
 
-
 		bool is_hit = GetWorld()->LineTraceSingleByObjectType(OutHit, Start, End, ObjParams, CollisionParams);
 
-		if (is_hit)//(ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
+		if (is_hit)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 0.3f, FColor::Red, FString::Printf(TEXT("Dio")));
-			GEngine->AddOnScreenDebugMessage(-1, 0.3f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
+			
+			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
+
+			
+			if (SceneVaus->GetActorLocation().X > this->GetActorLocation().X)
+			{
+
+				FVector dir = SceneVaus->GetActorLocation() - Start;
+				//Fvector dir_nor = dir.getd
+				FString a = dir.ToString();
+				//FString b = FString::SanitizeFloat(heaang);
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, a);
+				/*if (ProjectileMovement->Velocity.X > 0)
+					direction = FVector(-1.f, 1.f, -1.f);
+				else
+					direction = FVector(1.f, 1.f, -1.f);*/
+
+
+				//ProjectileMovement->Deactivate();
+				//BulletMesh->SetSimulatePhysics(false);
+				//this->SetActorLocation(this->GetActorLocation());
+				//ProjectileMovement->Velocity.X = 0;
+				//BulletMesh->AddImpulse(-dir, FName(), true);
+
+			}
+
+			
 		}
 
 

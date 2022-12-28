@@ -41,6 +41,7 @@ void AVaus::BeginPlay()
 void AVaus::MoveRight(float Val)
 {
 	AddMovementInput(FVector(1.f, 0.f, 0.f), Val , false);
+
 }
 
 UStaticMeshComponent* AVaus::GetMesh()

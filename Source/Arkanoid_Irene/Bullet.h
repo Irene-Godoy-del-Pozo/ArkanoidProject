@@ -21,6 +21,7 @@ public:
 
 	virtual void Shoot();
 
+	
 
 	bool is_Shot;
 
@@ -36,6 +37,8 @@ protected:
 
 	
 		AVaus* SceneVaus;
+
+		FVector direction = FVector(1.f,1.f, 1.f);
 
 public:	
 	// Called every frame
