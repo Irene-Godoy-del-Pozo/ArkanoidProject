@@ -21,7 +21,6 @@ public:
 
 	virtual void Shoot();
 
-	
 
 	bool is_Shot;
 
@@ -36,9 +35,9 @@ protected:
 		UProjectileMovementComponent* ProjectileMovement;
 
 	
-		AVaus* SceneVaus;
+		AVaus* SceneVaus;////
 
-		FVector direction = FVector(1.f,1.f, 1.f);
+		FVector direction = FVector(1.f,1.f, 1.f);///
 
 public:	
 	// Called every frame
@@ -48,6 +47,8 @@ public:
 
 		void SetPawn(AVaus& _Vaus);
 
+
+		/*void StopBullet();*/
 	
 		
 };

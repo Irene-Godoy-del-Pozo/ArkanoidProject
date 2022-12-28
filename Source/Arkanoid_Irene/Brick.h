@@ -35,7 +35,7 @@ protected:
 		UBoxComponent* Box_Collision;
 
 
-	float bounceSpeed = 0.5f;
+	float bounceSpeed = .01f;
 
 public:	
 	// Called every frame

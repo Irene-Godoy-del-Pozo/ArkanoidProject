@@ -43,7 +43,7 @@ protected:
 
 	ABullet* MyBullet;
 
-	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
+	FVector SpawnLocation = FVector(10.0f, 0.0f, 50.0f);
 	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
 };
