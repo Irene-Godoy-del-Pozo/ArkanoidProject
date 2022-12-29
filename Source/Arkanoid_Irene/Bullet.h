@@ -26,7 +26,6 @@ public:
 	UPROPERTY()
 		FBrickDestroy OnBrickDestroy;
 	
-
 	bool is_Shot;
 
 protected:
@@ -39,23 +38,18 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UProjectileMovementComponent* ProjectileMovement;
 
-	
+	//Pointer to the Vaus posses for the vausController
+	AVaus* SceneVaus;
 
 	
-		AVaus* SceneVaus;////
-
-		FVector direction = FVector(1.f,1.f, 1.f);///
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	UFUNCTION()
 		UStaticMeshComponent* GetBullet();
 
 		void SetPawn(AVaus& _Vaus);
 
-
-		/*void StopBullet();*/
-	
 		
 };

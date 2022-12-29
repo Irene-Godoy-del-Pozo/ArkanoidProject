@@ -35,26 +35,23 @@ void AVaus_Controller::BeginPlay()
 	SetViewTarget(CameraActors[0], Params);
 
 
-	isFinshed = false;
 	MyVaus = Cast<AVaus>( GetPawn());
 
+	//Suscribe to delegate of Vaus
 	MyVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
 	
 
 	SpawnNewBullet();
 
-	MyBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
+	
 }
 
 void AVaus_Controller::MoveRight(float Val)
-{
-	
-
+{	
 	if (MyVaus)
 		MyVaus->MoveRight(Val);
-
-
 }
+
 void AVaus_Controller::SpawnNewBullet()
 {
 	if (!MyBullet)
@@ -64,6 +61,9 @@ void AVaus_Controller::SpawnNewBullet()
 		MyBullet = GetWorld()->SpawnActor<ABullet>(BulletObj, SpawnLocation, SpawnRotation, SpawnInfo);
 
 	MyBullet->SetPawn(*MyVaus);
+
+	//Suscribe to delegate of Brick
+	MyBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
 }
 
 
@@ -85,6 +85,5 @@ void AVaus_Controller::StopVaus()
 void AVaus_Controller::BreakBrik()
 {
 	MyVaus->BrickDestroyed();
-	/*isFinshed = true;
-	StopVaus();*/
+
 }

@@ -13,12 +13,15 @@
 ABrick::ABrick()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
+	//---------------------Mesh----------------------------------
 	BrickMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BrickMesh"));
 
 	BrickMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
+
+	//---------------------Box Collision----------------------------------
 	Box_Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
 	Box_Collision->SetBoxExtent(FVector(25.0f, 10.0f, 10.0f));
 

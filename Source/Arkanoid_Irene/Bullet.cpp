@@ -62,21 +62,20 @@ void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//If its not shot , it follows thw Vaus
+	//If its not shot , it follows the Vaus
 	if (is_Shot == false && SceneVaus)
 	{
 		SetActorLocation(SceneVaus->GetActorLocation() + FVector(0.f, 0.f, 15.f));
 
 	}
-	// 
-	// 
-	////If is shot throw a raycast to detect the Vause
+
+	//If is shot throw a raycast to detect the Vause
 	//else if (this->GetActorLocation().Z < 40)
 	//{
 	//	FHitResult OutHit;
 
 	//	//Set The start and end vectors
-	//	FVector Start = GetActorLocation() -FVector(0.f, 0.f, 2.f);
+	//	FVector Start = GetActorLocation() - FVector(0.f, 0.f, 2.f);
 	//	FVector DownVector = -GetActorUpVector();
 	//	FVector End = ((DownVector * 1.f) + Start);
 
@@ -94,36 +93,11 @@ void ABullet::Tick(float DeltaTime)
 
 	//	if (is_hit)
 	//	{
-	//		
+
 	//		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
 
 	//		
-	//		if (SceneVaus->GetActorLocation().X > this->GetActorLocation().X)
-	//		{
-
-	//			FVector dir = SceneVaus->GetActorLocation() - Start;
-	//			//Fvector dir_nor = dir.getd
-	//			FString a = dir.ToString();
-	//			//FString b = FString::SanitizeFloat(heaang);
-	//			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, a);
-	//			/*if (ProjectileMovement->Velocity.X > 0)
-	//				direction = FVector(-1.f, 1.f, -1.f);
-	//			else
-	//				direction = FVector(1.f, 1.f, -1.f);*/
-
-
-	//			//ProjectileMovement->Deactivate();
-	//			//BulletMesh->SetSimulatePhysics(false);
-	//			//this->SetActorLocation(this->GetActorLocation());
-	//			//ProjectileMovement->Velocity.X = 0;
-	//			//BulletMesh->AddImpulse(-dir, FName(), true);
-
-	//		}
-
-	//		
 	//	}
-
-
 	//}
 
 }
@@ -137,24 +111,16 @@ void ABullet::SetPawn(AVaus& _Vaus)
 {
 	SceneVaus = &_Vaus;
 
-	//SceneVaus->OnVausDead.AddDynamic(this, &AVaus::StopVaus);
 }
 
-//void ABullet::StopBullet()
-//{
-//	BulletMesh->SetSimulatePhysics(false);
-//	ProjectileMovement->Velocity.X = ProjectileMovement->Velocity.Z = 0;
-//
-//	GetVelocity() *= 0;
-//
-//}
+
 
 void ABullet::Shoot()
 {
 	//Prevents to shoot the ball when its alredy shot
 	if (is_Shot == false)
 	{
-		BulletMesh->AddImpulse(FVector(140.0f, 0.f, 130.f), FName(), true);
+		BulletMesh->AddImpulse(FVector(45.f, 0.f, 130.f), FName(), true);
 
 		is_Shot = true;
 	}

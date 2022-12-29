@@ -35,7 +35,7 @@ AVaus::AVaus()
 
 	is_dead = false;
 
-	maxBricks = 30;
+	maxBricks = 18;
 
 	bricksBroken = 0;
 }
@@ -56,7 +56,7 @@ void AVaus::BrickDestroyed()
 {
 	bricksBroken++;
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Brick destroy")));
-	if (bricksBroken == maxBricks)
+	if (bricksBroken >= maxBricks)
 	{
 		OnVausDead.Broadcast();
 	}
@@ -110,8 +110,10 @@ int AVaus::GetBricks()
 	return bricksBroken;
 }
 
-
-void AVaus::SuscribeDelegateBullet(ABullet* bullet)
+int AVaus::GetMaxBricks()
 {
-	bullet->OnBrickDestroy.AddDynamic(this, &AVaus::BrickDestroyed);
+	return maxBricks;
 }
+
+
+

@@ -23,18 +23,20 @@ public :
 		UFUNCTION()
 		AVaus* GetMyVaus();
 
+		//Set Pause the game. Call by Vaus delegate
 		UFUNCTION()
 			void StopVaus();
 
+		//Calls the BrickDestroyed function of Vaus. Call by Brick delegate
 		UFUNCTION()
 			void BreakBrik();
 
 private:
+
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
 
 	
-
 
 protected:
 
@@ -57,5 +59,5 @@ protected:
 	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
 
-	bool isFinshed;
+	
 };
