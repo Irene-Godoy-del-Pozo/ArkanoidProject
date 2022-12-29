@@ -36,6 +36,8 @@ void AVaus_Controller::BeginPlay()
 
 	MyVaus = Cast<AVaus>( GetPawn());
 
+	MyVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
+
 	SpawnNewBullet();
 }
 
@@ -68,4 +70,9 @@ void AVaus_Controller::ShootBullet()
 AVaus* AVaus_Controller::GetMyVaus()
 {
 	return MyVaus;
+}
+
+void AVaus_Controller::StopVaus()
+{
+	Pause();
 }

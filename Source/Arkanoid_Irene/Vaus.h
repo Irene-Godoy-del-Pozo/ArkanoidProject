@@ -9,6 +9,10 @@
 class UFloatingPawnMovement;
 class UHealthComponent;
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVausIsDead);
+
+
 UCLASS()
 class ARKANOID_IRENE_API AVaus : public APawn
 {
@@ -31,6 +35,12 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetHealth();
 
+	UFUNCTION()
+		bool IsDead();
+
+	UPROPERTY()
+		FVausIsDead OnVausDead;
+
 	void MoveRight(float Val);
 
 	UFUNCTION()
@@ -40,6 +50,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	bool is_dead;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UFloatingPawnMovement* FloatPMovement;

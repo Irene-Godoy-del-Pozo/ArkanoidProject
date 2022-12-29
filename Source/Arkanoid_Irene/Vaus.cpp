@@ -31,7 +31,7 @@ AVaus::AVaus()
 
 	healthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
 
-
+	is_dead = false;
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +39,11 @@ void AVaus::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+bool AVaus::IsDead()
+{
+	return is_dead;
 }
 
 void AVaus::MoveRight(float Val)
@@ -72,7 +77,10 @@ void AVaus::TakeDamage()
 
 	if (healthComponent->GetHealth() <= 0)
 	{
-		//Death
+		is_dead = true;
+
+		OnVausDead.Broadcast();
+
 	}
 }
 

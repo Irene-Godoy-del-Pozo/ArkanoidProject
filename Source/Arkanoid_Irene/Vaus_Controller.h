@@ -23,6 +23,8 @@ public :
 		UFUNCTION()
 		AVaus* GetMyVaus();
 
+		UFUNCTION()
+			void StopVaus();
 private:
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
