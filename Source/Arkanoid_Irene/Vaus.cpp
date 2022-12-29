@@ -4,8 +4,10 @@
 #include "Vaus.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "DrawDebugHelpers.h"
 
 #include "HealthComponent.h"
+#include "Bullet.h"
 
 // Sets default values
 AVaus::AVaus()
@@ -32,6 +34,10 @@ AVaus::AVaus()
 	healthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
 
 	is_dead = false;
+
+	maxBricks = 30;
+
+	bricksBroken = 0;
 }
 
 // Called when the game starts or when spawned
@@ -44,6 +50,16 @@ void AVaus::BeginPlay()
 bool AVaus::IsDead()
 {
 	return is_dead;
+}
+
+void AVaus::BrickDestroyed()
+{
+	bricksBroken++;
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Brick destroy")));
+	if (bricksBroken == maxBricks)
+	{
+		OnVausDead.Broadcast();
+	}
 }
 
 void AVaus::MoveRight(float Val)
@@ -87,4 +103,15 @@ void AVaus::TakeDamage()
 float AVaus::GetHealth()
 {
 	return healthComponent->GetHealth();
+}
+
+int AVaus::GetBricks()
+{
+	return bricksBroken;
+}
+
+
+void AVaus::SuscribeDelegateBullet(ABullet* bullet)
+{
+	bullet->OnBrickDestroy.AddDynamic(this, &AVaus::BrickDestroyed);
 }

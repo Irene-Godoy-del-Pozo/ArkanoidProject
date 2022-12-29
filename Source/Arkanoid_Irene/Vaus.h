@@ -4,14 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Delegates/Delegate.h"
 #include "Vaus.generated.h"
-
 class UFloatingPawnMovement;
 class UHealthComponent;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVausIsDead);
 
+//DECLARE_DELEGATE(FVictory);
 
 UCLASS()
 class ARKANOID_IRENE_API AVaus : public APawn
@@ -35,22 +36,38 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetHealth();
 
+	UFUNCTION(BlueprintPure)
+		int GetBricks();
+
 	UFUNCTION()
 		bool IsDead();
 
+	UFUNCTION()
+		void BrickDestroyed();
+
 	UPROPERTY()
 		FVausIsDead OnVausDead;
+
+	//UPROPERTY()
+	//	FVictory OnFinished;
 
 	void MoveRight(float Val);
 
 	UFUNCTION()
 		UStaticMeshComponent* GetMesh();
 
+	UFUNCTION()
+		void SuscribeDelegateBullet(ABullet* bullet);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	bool is_dead;
+
+	int bricksBroken;
+
+	int maxBricks;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UFloatingPawnMovement* FloatPMovement;

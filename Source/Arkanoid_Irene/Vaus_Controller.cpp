@@ -34,11 +34,16 @@ void AVaus_Controller::BeginPlay()
 	FViewTargetTransitionParams Params;
 	SetViewTarget(CameraActors[0], Params);
 
+
+	isFinshed = false;
 	MyVaus = Cast<AVaus>( GetPawn());
 
 	MyVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
+	
 
 	SpawnNewBullet();
+
+	MyBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
 }
 
 void AVaus_Controller::MoveRight(float Val)
@@ -75,4 +80,11 @@ AVaus* AVaus_Controller::GetMyVaus()
 void AVaus_Controller::StopVaus()
 {
 	Pause();
+}
+
+void AVaus_Controller::BreakBrik()
+{
+	MyVaus->BrickDestroyed();
+	/*isFinshed = true;
+	StopVaus();*/
 }

@@ -136,6 +136,8 @@ UStaticMeshComponent* ABullet::GetBullet()
 void ABullet::SetPawn(AVaus& _Vaus)
 {
 	SceneVaus = &_Vaus;
+
+	//SceneVaus->OnVausDead.AddDynamic(this, &AVaus::StopVaus);
 }
 
 //void ABullet::StopBullet()

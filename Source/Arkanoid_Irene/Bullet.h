@@ -10,6 +10,7 @@
 class AVaus;
 class UProjectileMovementComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBrickDestroy);
 
 UCLASS()
 class ARKANOID_IRENE_API ABullet : public AActor
@@ -22,6 +23,8 @@ public:
 
 	void Shoot();
 
+	UPROPERTY()
+		FBrickDestroy OnBrickDestroy;
 	
 
 	bool is_Shot;
