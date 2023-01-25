@@ -10,8 +10,8 @@ UHealthComponent::UHealthComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	MaxHealth = 3;
-	currentHealth = MaxHealth;
+	maxHealth = 3;
+	currentHealth = maxHealth;
 }
 
 
@@ -25,7 +25,7 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::TakeDamage()
 {
-	currentHealth = FMath::Clamp(currentHealth - 1, 0.f , MaxHealth);
+	currentHealth = FMath::Clamp(currentHealth - 1, 0.f , maxHealth);
 }
 
 float UHealthComponent::GetHealth()

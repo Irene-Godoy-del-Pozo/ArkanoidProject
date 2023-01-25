@@ -45,19 +45,19 @@ protected:
 	void MoveRight(float Val);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		AVaus* MyVaus;
+		AVaus* myVaus;
 
 	void ShootBullet();
 
 	//References the bluprint of bullet. TSubclassof references the TYPE of data. It permit to Create new objects of the class
 	UPROPERTY(EditAnywhere)
-		TSubclassOf<ABullet> BulletObj;
+		TSubclassOf<ABullet> bulletObj;
 
-	ABullet* MyBullet;
+	ABullet* myBullet;
 
 	FVector SpawnLocation = FVector(10.0f, 0.0f, 50.0f);
 	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
-	FActorSpawnParameters SpawnInfo;
+	FActorSpawnParameters spawnInfo;
 
 	
 };

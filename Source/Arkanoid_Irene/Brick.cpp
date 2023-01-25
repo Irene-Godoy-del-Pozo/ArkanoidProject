@@ -7,6 +7,7 @@
 #include "DrawDebugHelpers.h"
 
 #include "Bullet.h"
+#include "Arkanoid_IreneGameModeBase.h"
 
 
 // Sets default values
@@ -15,7 +16,7 @@ ABrick::ABrick()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	//---------------------Mesh----------------------------------
+	//---------------------Mesh-------------------------------------------
 	BrickMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BrickMesh"));
 
 	BrickMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -38,10 +39,10 @@ void ABrick::BeginPlay()
 
 void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndexType, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("Overlap event")));
+	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::Printf(TEXT("Overlap event")));
 	if (OtherActor->ActorHasTag("Bullet")) {
 
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, FString::Printf(TEXT("Is Bullet")));
+		//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, FString::Printf(TEXT("Is Bullet")));
 
 		ABullet* MyBullet = Cast<ABullet>(OtherActor);
 
@@ -50,12 +51,13 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 		MyBullet->GetBullet()->SetPhysicsLinearVelocity(BulletVelocity, true);
 	
-		
-		
+		AArkanoid_IreneGameModeBase* mymode = Cast<AArkanoid_IreneGameModeBase>(GetWorld()->GetAuthGameMode());
+		mymode->BrickDestroyed();
+
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, 0.05f, false);
 
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, FString::Printf(TEXT("reach")));
+		//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, FString::Printf(TEXT("reach")));
 
 		MyBullet->OnBrickDestroy.Broadcast();
 

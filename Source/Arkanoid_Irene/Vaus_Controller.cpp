@@ -27,18 +27,18 @@ void AVaus_Controller::SetupInputComponent()
 void AVaus_Controller::BeginPlay()
 {
 	//Get ALL Camera actors of the scene. In this case it will be only one 
-	TArray<AActor*> CameraActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACameraActor::StaticClass(), CameraActors);
+	TArray<AActor*> cameraActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACameraActor::StaticClass(), cameraActors);
 
 	//Bind the camerato the actor
-	FViewTargetTransitionParams Params;
-	SetViewTarget(CameraActors[0], Params);
+	FViewTargetTransitionParams params;
+	SetViewTarget(cameraActors[0], params);
 
 
-	MyVaus = Cast<AVaus>( GetPawn());
+	myVaus = Cast<AVaus>( GetPawn());
 
 	//Suscribe to delegate of Vaus
-	MyVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
+	myVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
 	
 
 	SpawnNewBullet();
@@ -48,33 +48,33 @@ void AVaus_Controller::BeginPlay()
 
 void AVaus_Controller::MoveRight(float Val)
 {	
-	if (MyVaus)
-		MyVaus->MoveRight(Val);
+	if (myVaus)
+		myVaus->MoveRight(Val);
 }
 
 void AVaus_Controller::SpawnNewBullet()
 {
-	if (!MyBullet)
-		MyBullet = nullptr;
+	if (!myBullet)
+		myBullet = nullptr;
 
-	if (BulletObj)
-		MyBullet = GetWorld()->SpawnActor<ABullet>(BulletObj, SpawnLocation, SpawnRotation, SpawnInfo);
+	if (bulletObj)
+		myBullet = GetWorld()->SpawnActor<ABullet>(bulletObj, SpawnLocation, SpawnRotation, spawnInfo);
 
-	MyBullet->SetPawn(*MyVaus);
+	myBullet->SetPawn(*myVaus);
 
 	//Suscribe to delegate of Brick
-	MyBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
+	myBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
 }
 
 
 void AVaus_Controller::ShootBullet()
 {
-	MyBullet->Shoot();
+	myBullet->Shoot();
 }
 
 AVaus* AVaus_Controller::GetMyVaus()
 {
-	return MyVaus;
+	return myVaus;
 }
 
 void AVaus_Controller::StopVaus()
@@ -84,6 +84,6 @@ void AVaus_Controller::StopVaus()
 
 void AVaus_Controller::BreakBrik()
 {
-	MyVaus->BrickDestroyed();
+	myVaus->BrickDestroyed();
 
 }

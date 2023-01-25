@@ -49,6 +49,7 @@ void AVaus::BeginPlay()
 
 bool AVaus::IsDead()
 {
+	
 	return is_dead;
 }
 
