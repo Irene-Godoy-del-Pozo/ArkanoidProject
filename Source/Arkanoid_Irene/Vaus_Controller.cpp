@@ -37,8 +37,8 @@ void AVaus_Controller::BeginPlay()
 
 	myVaus = Cast<AVaus>( GetPawn());
 
-	//Suscribe to delegate of Vaus
-	myVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
+	////Suscribe to delegate of Vaus
+	//myVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
 	
 
 	SpawnNewBullet();
@@ -62,8 +62,8 @@ void AVaus_Controller::SpawnNewBullet()
 
 	myBullet->SetPawn(*myVaus);
 
-	//Suscribe to delegate of Brick
-	myBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
+	////Suscribe to delegate of Brick
+	//myBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
 }
 
 
@@ -77,13 +77,13 @@ AVaus* AVaus_Controller::GetMyVaus()
 	return myVaus;
 }
 
-void AVaus_Controller::StopVaus()
+void AVaus_Controller::PauseGame()
 {
 	Pause();
 }
 
-void AVaus_Controller::BreakBrik()
-{
-	myVaus->BrickDestroyed();
-
-}
+//void AVaus_Controller::BreakBrik()
+//{
+//	myVaus->BrickDestroyed();
+//
+//}

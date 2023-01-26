@@ -32,7 +32,5 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		int32 currentScore;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		int32 maxScore;
 private:
 };

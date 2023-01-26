@@ -7,7 +7,7 @@ AArkanoidGameStateBase::AArkanoidGameStateBase()
 {
 	currentBricksDestroyed = 0;
 	currentScore = 0;
-	maxScore = 0;
+
 }
 
 int32 AArkanoidGameStateBase::GetBricksDestroyed()

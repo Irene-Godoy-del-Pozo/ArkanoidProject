@@ -11,7 +11,7 @@ class UFloatingPawnMovement;
 class UHealthComponent;
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVausIsDead);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVausIsDead);
 
 
 UCLASS()
@@ -30,25 +30,25 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void TakeDamage();
+	void BulletMissed();
 
 	UFUNCTION(BlueprintPure)
 	float GetHealth();
 
-	UFUNCTION(BlueprintPure)
+	/*UFUNCTION(BlueprintPure)
 		int GetBricks();
 
 	UFUNCTION(BlueprintPure)
-		int GetMaxBricks();
+		int GetMaxBricks();*/
 
-	UFUNCTION()
-		bool IsDead();
+	/*UFUNCTION()
+		bool IsDead();*/
 
-	UFUNCTION()
-		void BrickDestroyed();
+	//UFUNCTION()
+	//	void BrickDestroyed();
 
-	UPROPERTY()
-		FVausIsDead OnVausDead;
+	//UPROPERTY()
+	//	FVausIsDead OnVausDead;
 
 
 	void MoveRight(float Val);
@@ -62,11 +62,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	bool is_dead;
-	UPROPERTY(VisibleAnywhere)
-	int bricksBroken;
-	UPROPERTY(VisibleAnywhere)
-	int maxBricks;
+	//bool is_dead;
+	//UPROPERTY(VisibleAnywhere)
+	//int bricksBroken;
+	//UPROPERTY(VisibleAnywhere)
+	//int maxBricks;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UFloatingPawnMovement* FloatPMovement;

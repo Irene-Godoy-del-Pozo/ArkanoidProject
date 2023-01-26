@@ -45,7 +45,7 @@ void ABulletBoundTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AA
 
 		AVaus* aux = _vausController->GetMyVaus();
 
-		aux->TakeDamage();
+		aux->BulletMissed();
 
 	}
 }

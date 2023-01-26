@@ -13,7 +13,7 @@ AArkanoid_IreneGameModeBase::AArkanoid_IreneGameModeBase()
 	DefaultPawnClass = AVaus::StaticClass();
 	PlayerControllerClass = AVaus_Controller::StaticClass();
 
-
+	//vausController = Cast<AVaus_Controller>(GEngine->GetFirstLocalPlayerController(GetWorld()));
 }
 
 
@@ -26,12 +26,27 @@ void AArkanoid_IreneGameModeBase::BrickDestroyed()
 	{
 		//Cambia el widget etc
 		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, TEXT("Victory!!!"));
-
+				
 		isVictory = true;
+
+		AVaus_Controller* vausController = Cast<AVaus_Controller>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+
+		if (vausController != NULL)
+			vausController->Pause();
+
 	}
 }
 
 bool AArkanoid_IreneGameModeBase::CheckVictory()
 {
 	return GetGameState< AArkanoidGameStateBase >()->GetBricksDestroyed() >= maxBricks;
+}
+
+void AArkanoid_IreneGameModeBase::FinishGame()
+{
+
+	int32 finalScore = GetGameState< AArkanoidGameStateBase >()->currentScore;
+	if (finalScore > maxScore)
+		maxScore = finalScore;
+
 }

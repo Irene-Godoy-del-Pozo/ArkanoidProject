@@ -32,12 +32,13 @@ AVaus::AVaus()
 	//-------------Health----------
 
 	healthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+	healthComponent->SetMaxHealth(3);
 
-	is_dead = false;
+	/*is_dead = false;*/
 
-	maxBricks = 18;
+	/*maxBricks = 18;
 
-	bricksBroken = 0;
+	bricksBroken = 0;*/
 }
 
 // Called when the game starts or when spawned
@@ -47,21 +48,21 @@ void AVaus::BeginPlay()
 	
 }
 
-bool AVaus::IsDead()
-{
-	
-	return is_dead;
-}
+//bool AVaus::IsDead()
+//{
+//	
+//	return is_dead;
+//}
 
-void AVaus::BrickDestroyed()
-{
-	bricksBroken++;
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Brick destroy")));
-	if (bricksBroken >= maxBricks)
-	{
-		OnVausDead.Broadcast();
-	}
-}
+//void AVaus::BrickDestroyed()
+//{
+//	bricksBroken++;
+//	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Brick destroy")));
+//	if (bricksBroken >= maxBricks)
+//	{
+//		OnVausDead.Broadcast();
+//	}
+//}
 
 void AVaus::MoveRight(float Val)
 {
@@ -88,15 +89,18 @@ void AVaus::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void AVaus::TakeDamage()
+void AVaus::BulletMissed()
 {
 	healthComponent->TakeDamage();
 
-	if (healthComponent->GetHealth() <= 0)
+	if (healthComponent->IsDead())
 	{
-		is_dead = true;
+		//TODO: Call GameMode function
 
-		OnVausDead.Broadcast();
+
+		/*is_dead = true;*/
+
+		/*OnVausDead.Broadcast();*/
 
 	}
 }
@@ -106,15 +110,15 @@ float AVaus::GetHealth()
 	return healthComponent->GetHealth();
 }
 
-int AVaus::GetBricks()
-{
-	return bricksBroken;
-}
-
-int AVaus::GetMaxBricks()
-{
-	return maxBricks;
-}
+//int AVaus::GetBricks()
+//{
+//	return bricksBroken;
+//}
+//
+//int AVaus::GetMaxBricks()
+//{
+//	return maxBricks;
+//}
 
 
 

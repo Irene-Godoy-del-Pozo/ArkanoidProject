@@ -25,11 +25,13 @@ public :
 
 		//Set Pause the game. Call by Vaus delegate
 		UFUNCTION()
-			void StopVaus();
+			void PauseGame();
 
-		//Calls the BrickDestroyed function of Vaus. Call by Brick delegate
-		UFUNCTION()
-			void BreakBrik();
+		////Calls the BrickDestroyed function of Vaus. Call by Brick delegate
+		//UFUNCTION()
+		//	void BreakBrik();
+
+		
 
 private:
 
@@ -44,7 +46,7 @@ protected:
 
 	void MoveRight(float Val);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	//!!!!!!UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		AVaus* myVaus;
 
 	void ShootBullet();

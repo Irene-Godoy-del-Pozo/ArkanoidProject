@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Arkanoid_IreneGameModeBase.generated.h"
 
+
 /**
  * 
  */
@@ -30,12 +31,17 @@ public:
 		int32 maxBricks = 0;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		int32 maxScore;
+		int32 maxScore = 0; //TODO: Get from save
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		bool isVictory = false;
 
+	UFUNCTION(BlueprintCallable)
+	void FinishGame();
+
 private:
 
 	bool CheckVictory();
+
+	
 };

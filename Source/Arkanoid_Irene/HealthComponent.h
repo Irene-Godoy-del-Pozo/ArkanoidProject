@@ -15,20 +15,25 @@ class ARKANOID_IRENE_API UHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
+	~UHealthComponent()=default;
 
 	UFUNCTION(BlueprintPure)
 		float GetHealth();
 
+	void SetMaxHealth(float health);
+
 	void TakeDamage();
+
+	bool IsDead();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	UPROPERTY(VisibleAnywhere,Category = "Health")
 		float maxHealth;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, Category = "Health")
 		float currentHealth;
 		
 	
