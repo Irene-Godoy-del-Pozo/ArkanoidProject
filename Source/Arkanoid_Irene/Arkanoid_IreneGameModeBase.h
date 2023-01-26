@@ -36,12 +36,16 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		bool isVictory = false;
 
-	UFUNCTION(BlueprintCallable)
+	//UFUNCTION(BlueprintCallable)
 	void FinishGame();
+
+
 
 private:
 
 	bool CheckVictory();
+
+	void StopGame(); //DELETE?
 
 	
 };

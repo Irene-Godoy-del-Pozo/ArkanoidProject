@@ -23,6 +23,7 @@ class ARKANOID_IRENE_API AVaus : public APawn
 public:
 	// Sets default values for this pawn's properties
 	AVaus();
+	~AVaus() = default;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -32,6 +33,7 @@ public:
 
 	void BulletMissed();
 
+	//Used for GameHUD widget to show player health
 	UFUNCTION(BlueprintPure)
 	float GetHealth();
 

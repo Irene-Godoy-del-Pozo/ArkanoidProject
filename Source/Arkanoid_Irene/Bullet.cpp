@@ -49,6 +49,19 @@ ABullet::ABullet()
 	
 	
 }
+void ABullet::Reset()
+{
+	ProjectileMovement->Velocity.X = 0.0f;
+	ProjectileMovement->Velocity.Y = 0.0f;
+	ProjectileMovement->Velocity.Z = 0.0f;
+
+	is_Shot = false;
+	same++;
+	BulletMesh->SetPhysicsLinearVelocity(FVector::ZeroVector, false);
+
+	BulletMesh->ComponentVelocity.Set(0, 0, 0);
+
+}
 
 // Called when the game starts or when spawned
 void ABullet::BeginPlay()

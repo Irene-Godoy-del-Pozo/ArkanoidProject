@@ -17,7 +17,7 @@ class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
 
 public :
 		AVaus_Controller() {};
-
+		~AVaus_Controller() = default;
 		void SpawnNewBullet();
 
 		UFUNCTION()

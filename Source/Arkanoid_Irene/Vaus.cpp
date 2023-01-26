@@ -8,6 +8,7 @@
 
 #include "HealthComponent.h"
 #include "Bullet.h"
+#include "Arkanoid_IreneGameModeBase.h"
 
 // Sets default values
 AVaus::AVaus()
@@ -64,11 +65,6 @@ void AVaus::BeginPlay()
 //	}
 //}
 
-void AVaus::MoveRight(float Val)
-{
-	AddMovementInput(FVector(1.f, 0.f, 0.f), Val , false);
-
-}
 
 UStaticMeshComponent* AVaus::GetMesh()
 {
@@ -96,7 +92,8 @@ void AVaus::BulletMissed()
 	if (healthComponent->IsDead())
 	{
 		//TODO: Call GameMode function
-
+		AArkanoid_IreneGameModeBase* mymode = Cast<AArkanoid_IreneGameModeBase>(GetWorld()->GetAuthGameMode());
+		mymode->FinishGame();
 
 		/*is_dead = true;*/
 
@@ -110,6 +107,11 @@ float AVaus::GetHealth()
 	return healthComponent->GetHealth();
 }
 
+void AVaus::MoveRight(float Val)
+{
+	AddMovementInput(FVector(1.f, 0.f, 0.f), Val , false);
+
+}
 //int AVaus::GetBricks()
 //{
 //	return bricksBroken;

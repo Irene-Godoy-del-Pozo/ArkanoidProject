@@ -54,13 +54,25 @@ void AVaus_Controller::MoveRight(float Val)
 
 void AVaus_Controller::SpawnNewBullet()
 {
-	if (!myBullet)
-		myBullet = nullptr;
+	/*if (!myBullet)
+		myBullet = nullptr;*/
 
-	if (bulletObj)
-		myBullet = GetWorld()->SpawnActor<ABullet>(bulletObj, SpawnLocation, SpawnRotation, spawnInfo);
+	if (myBullet == NULL)
+	{
+		if (bulletObj)
+			myBullet = GetWorld()->SpawnActor<ABullet>(bulletObj, SpawnLocation, SpawnRotation, spawnInfo);
 
-	myBullet->SetPawn(*myVaus);
+		myBullet->SetPawn(*myVaus);
+	}
+	else
+	{
+		/*myBullet->is_Shot = false;
+		myBullet->same++;
+		myBullet->GetBullet()->SetPhysicsLinearVelocity(FVector(0, 0, 0), true);*/
+
+		myBullet->Reset();
+	}
+
 
 	////Suscribe to delegate of Brick
 	//myBullet->OnBrickDestroy.AddDynamic(this, &AVaus_Controller::BreakBrik);
@@ -77,6 +89,7 @@ AVaus* AVaus_Controller::GetMyVaus()
 	return myVaus;
 }
 
+//TODO:make a pause input
 void AVaus_Controller::PauseGame()
 {
 	Pause();

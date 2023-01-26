@@ -39,7 +39,7 @@ void ABulletBoundTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AA
 {
 	if (OtherActor->ActorHasTag("Bullet")) {
 
-		OtherActor->Destroy();
+		//OtherActor->Destroy();
 
 		_vausController->SpawnNewBullet();
 

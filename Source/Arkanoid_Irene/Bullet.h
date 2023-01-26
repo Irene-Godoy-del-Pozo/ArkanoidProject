@@ -27,6 +27,10 @@ public:
 		FBrickDestroy OnBrickDestroy;
 	
 	bool is_Shot;
+	UPROPERTY(VisibleAnywhere)
+		int32 same = 0;
+
+	void Reset();
 
 protected:
 	// Called when the game starts or when spawned
