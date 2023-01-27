@@ -20,6 +20,7 @@ class ARKANOID_IRENE_API ABullet : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABullet();
+	~ABullet() = default;
 
 	void Shoot();
 

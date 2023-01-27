@@ -8,7 +8,7 @@
 
 #include "Vaus.h"
 #include "Bullet.h"
-
+#include "Arkanoid_IreneGameModeBase.h"
 
 
 void AVaus_Controller::SetupInputComponent()
@@ -20,6 +20,8 @@ void AVaus_Controller::SetupInputComponent()
 	//Bind the Axis on the input window to the method to Move
 	InputComponent->BindAxis("MoveRight", this, &AVaus_Controller::MoveRight);
 	InputComponent->BindAction("Shoot", IE_Pressed, this, &AVaus_Controller::ShootBullet);
+	toggle = &InputComponent->BindAction("Pause", IE_Pressed, this, &AVaus_Controller::PauseGame);
+	toggle->bExecuteWhenPaused = true;
 }
 
 
@@ -34,9 +36,9 @@ void AVaus_Controller::BeginPlay()
 	FViewTargetTransitionParams params;
 	SetViewTarget(cameraActors[0], params);
 
-
 	myVaus = Cast<AVaus>( GetPawn());
 
+	//isPaused = false;
 	////Suscribe to delegate of Vaus
 	//myVaus->OnVausDead.AddDynamic(this, &AVaus_Controller::StopVaus);
 	
@@ -92,7 +94,16 @@ AVaus* AVaus_Controller::GetMyVaus()
 //TODO:make a pause input
 void AVaus_Controller::PauseGame()
 {
-	Pause();
+	AArkanoid_IreneGameModeBase* mymode = Cast<AArkanoid_IreneGameModeBase>(GetWorld()->GetAuthGameMode());
+	mymode->PauseGame(IsPaused());
+	
+	//Unpause();
+}
+
+void AVaus_Controller::UnBindPauseAction()
+{
+	InputComponent->RemoveActionBinding("Pause", IE_Pressed);
+
 }
 
 //void AVaus_Controller::BreakBrik()

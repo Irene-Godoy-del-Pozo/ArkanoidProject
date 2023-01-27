@@ -17,6 +17,8 @@ class ARKANOID_IRENE_API ABulletBoundTrigger : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABulletBoundTrigger();
+	~ABulletBoundTrigger() = default;
+
 
 protected:
 	// Called when the game starts or when spawned

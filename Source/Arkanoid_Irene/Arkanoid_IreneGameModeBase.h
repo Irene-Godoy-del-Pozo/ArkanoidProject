@@ -11,7 +11,7 @@
  * 
  */
 
-
+class AVaus_Controller;
 
 UCLASS()
 class ARKANOID_IRENE_API AArkanoid_IreneGameModeBase : public AGameModeBase
@@ -39,13 +39,13 @@ public:
 	//UFUNCTION(BlueprintCallable)
 	void FinishGame();
 
-
+	void PauseGame(bool isPaused);
 
 private:
 
 	bool CheckVictory();
 
-	void StopGame(); //DELETE?
+	AVaus_Controller* GetController(); //DELETE?
 
 	
 };

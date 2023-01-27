@@ -16,6 +16,7 @@ class ARKANOID_IRENE_API ABrick : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABrick();
+	~ABrick() = default;
 
 protected:
 	// Called when the game starts or when spawned

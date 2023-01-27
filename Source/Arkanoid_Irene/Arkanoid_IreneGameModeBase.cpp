@@ -31,7 +31,10 @@ void AArkanoid_IreneGameModeBase::BrickDestroyed()
 	
 
 		//StopGame();
-		FinishGame();
+		FTimerHandle UnusedHandle;
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AArkanoid_IreneGameModeBase::FinishGame,.1f, false);
+
+		//FinishGame();
 	}
 }
 
@@ -40,14 +43,23 @@ bool AArkanoid_IreneGameModeBase::CheckVictory()
 	return GetGameState< AArkanoidGameStateBase >()->GetBricksDestroyed() >= maxBricks;
 }
 
-void AArkanoid_IreneGameModeBase::FinishGame()
+AVaus_Controller* AArkanoid_IreneGameModeBase::GetController()
 {
 	AVaus_Controller* vausController = Cast<AVaus_Controller>(GEngine->GetFirstLocalPlayerController(GetWorld()));
 
-	if (vausController != NULL)
-		vausController->Pause();
+	return vausController;
+}
 
-	//Update mas score
+void AArkanoid_IreneGameModeBase::FinishGame()
+{
+	AVaus_Controller* vausController = GetController();
+
+	if (vausController != NULL)
+	{
+		vausController->Pause();
+		vausController->UnBindPauseAction();
+	}
+	//Update max score
 	int32 finalScore = GetGameState< AArkanoidGameStateBase >()->currentScore;
 	if (finalScore > maxScore)
 		maxScore = finalScore;
@@ -56,12 +68,13 @@ void AArkanoid_IreneGameModeBase::FinishGame()
 
 }
 
-void AArkanoid_IreneGameModeBase::StopGame()
+void AArkanoid_IreneGameModeBase::PauseGame(bool isPaused)
 {
-	//Stop movement of the bullet and vaus
-	AVaus_Controller* vausController = Cast<AVaus_Controller>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+	AVaus_Controller* vausController = GetController();
 
 	if (vausController != NULL)
-		vausController->Pause();
-
+	{
+		vausController->SetPause(!isPaused);
+		
+	}
 }

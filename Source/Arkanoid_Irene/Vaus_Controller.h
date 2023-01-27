@@ -18,6 +18,7 @@ class ARKANOID_IRENE_API AVaus_Controller : public APlayerController
 public :
 		AVaus_Controller() {};
 		~AVaus_Controller() = default;
+
 		void SpawnNewBullet();
 
 		UFUNCTION()
@@ -31,14 +32,14 @@ public :
 		//UFUNCTION()
 		//	void BreakBrik();
 
-		
+		void UnBindPauseAction();
 
 private:
 
 	UFUNCTION()
 		virtual void SetupInputComponent() override;
 
-	
+	//bool isPaused;
 
 protected:
 
@@ -61,5 +62,6 @@ protected:
 	FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters spawnInfo;
 
+	FInputActionBinding*  toggle;
 	
 };
