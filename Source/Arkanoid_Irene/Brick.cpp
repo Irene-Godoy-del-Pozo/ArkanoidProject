@@ -49,7 +49,7 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		FVector BulletVelocity = MyBullet->GetVelocity();
 		BulletVelocity *= bounceSpeed ;
 
-		MyBullet->GetBullet()->SetPhysicsLinearVelocity(BulletVelocity, true);
+		MyBullet->GetBullet()->SetPhysicsLinearVelocity(BulletVelocity, false);
 	
 		AArkanoid_IreneGameModeBase* mymode = Cast<AArkanoid_IreneGameModeBase>(GetWorld()->GetAuthGameMode());
 		mymode->BrickDestroyed();

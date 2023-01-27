@@ -34,12 +34,15 @@ public:
 		int32 maxScore = 0; //TODO: Get from save
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		bool isVictory = false;
+		bool isVictory;
 
 	//UFUNCTION(BlueprintCallable)
 	void FinishGame();
 
 	void PauseGame(bool isPaused);
+
+	UFUNCTION(BlueprintCallable)
+		void InitializeGame();
 
 private:
 

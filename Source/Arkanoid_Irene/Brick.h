@@ -35,8 +35,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UBoxComponent* Box_Collision;
 
-
-	float bounceSpeed = .1f;
+	UPROPERTY(EditAnywhere)
+	float bounceSpeed = 1.7f;
 
 public:	
 	// Called every frame

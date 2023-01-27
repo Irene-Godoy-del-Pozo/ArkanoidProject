@@ -5,6 +5,7 @@
 #include "ArkanoidGameStateBase.h"
 #include "Vaus.h"
 #include "Vaus_Controller.h"
+#include "ArkanoidGameInstance.h"
 
 AArkanoid_IreneGameModeBase::AArkanoid_IreneGameModeBase()
 {
@@ -13,8 +14,22 @@ AArkanoid_IreneGameModeBase::AArkanoid_IreneGameModeBase()
 	DefaultPawnClass = AVaus::StaticClass();
 	PlayerControllerClass = AVaus_Controller::StaticClass();
 
-	}
+	isVictory = false;
 
+	bPauseable = false;
+}
+
+void AArkanoid_IreneGameModeBase::InitializeGame()
+{
+	UArkanoidGameInstance* mymode = Cast<UArkanoidGameInstance>(GetGameInstance());
+
+	if (mymode != NULL)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, TEXT("Game Instance exists"));
+		maxScore = mymode->GetmaxScore();
+	}
+	bPauseable = true;
+}
 
 void AArkanoid_IreneGameModeBase::BrickDestroyed()
 {
@@ -65,7 +80,12 @@ void AArkanoid_IreneGameModeBase::FinishGame()
 		maxScore = finalScore;
 
 	//TODO : Save maxScore
+	UArkanoidGameInstance* mymode = Cast<UArkanoidGameInstance>(GetGameInstance());
 
+	if (mymode != NULL)
+	{
+		mymode->GameFinished(maxScore,1);
+	}
 }
 
 void AArkanoid_IreneGameModeBase::PauseGame(bool isPaused)
